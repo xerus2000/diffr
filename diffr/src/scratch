@@ -1,0 +1,23 @@
+println!(
+    "match: {}[{}/{}] == {}[{}/{}] == {} == {}",
+    String::from_utf8_lossy(
+        &*input
+            .seq_a
+            .iter()
+            .flat_map(|x| x.iter().cloned())
+            .collect::<Vec<_>>()
+    ),
+    f(dx, n),
+    n - 1,
+    String::from_utf8_lossy(
+        &*input
+            .seq_b
+            .iter()
+            .flat_map(|x| x.iter().cloned())
+            .collect::<Vec<_>>()
+    ),
+    f(dy, m),
+    m - 1,
+    String::from_utf8_lossy(&*input.seq_a[f(dx, n)]),
+    String::from_utf8_lossy(&*input.seq_b[f(dy, m)]),
+);

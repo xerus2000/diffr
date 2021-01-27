@@ -1,13 +1,12 @@
 ## diffr
 
-Reviewing changes involves reading diffs.  Sometimes, a line-oriented
-presentation of changes is not precise enough, especially when changes
-involve long lines or very similar consecutive lines.
+Reviewing changes involves reading diffs.
+Sometimes, a line-oriented presentation of changes is not precise
+enough, especially when changes involve long lines or very similar
+consecutive lines.
 
-This program processes such diffs, and outputs them (in the console)
-with additional diff information on top of the unified diff format,
-using text attributes.
-
+This program takes diffs and adds additional formatting on top
+of the unified diff format using text attributes.
 It works hunk by hunk, recomputing the diff on a word-by-word basis.
 
 The current implementation uses 
@@ -27,16 +26,14 @@ algorithm.
 #### Arch Linux
 
 Install from the [AUR](https://aur.archlinux.org/packages/diffr/):
-
-```
+```sh
 git clone https://aur.archlinux.org/diffr.git
 cd diffr
 makepkg -si
 ```
 
 #### Homebrew
-
-```
+```sh
 brew install diffr
 ```
 
@@ -45,14 +42,12 @@ brew install diffr
 You will need the [Rust compiler installed](https://www.rust-lang.org/tools/install).
 
 To install the latest published version:
-
-```
+```sh
 cargo install diffr
 ```
 
 Alternatively, you can build the development version:
-
-```
+```sh
 git clone https://github.com/mookid/diffr.git
 cd diffr
 cargo install --path .
@@ -60,12 +55,12 @@ cargo install --path .
 
 ### How to use it?
 
-diffr tries to be a well behaved Unix program: it reads its input from stdin
-and writes to stdout.
+diffr tries to be a well behaved Unix program:
+It reads its input from stdin and writes to stdout.
 
 #### One-off usage
 
-```
+```sh
 git show HEAD | diffr
 ```
 
@@ -73,48 +68,46 @@ git show HEAD | diffr
 
 Add the following section to your `.gitconfig` file:
 
-```
+```gitconfig
 [core]
     pager = diffr | less -R
 [interactive]
     diffFilter = diffr
 ```
 
-Alternatively, you can run from the command line:
+Alternatively, you can update your configuration from the command line:
 
-```
+```sh
 git config --global core.pager 'diffr | less -R'
 git config --global interactive.difffilter diffr
 ```
 
 #### Color customization
 
-Use the --colors flag.
+Use the `--colors` flag.
 
 You can customize the display of diffing and common segments of added
 and removed lines.
 
-For example,
+For instance, here is an example to tweak the red used for uniquely removed text:
 
-```
+```sh
 diffr --colors refine-removed:background:200,0,0:foreground:white:bold
 ```
 
-tweaks the red used for uniquely removed text;
-
 The configuration used in the first screenshot is
 
-```
+```sh
 diffr --colors refine-added:none:background:0x33,0x99,0x33:bold --colors added:none:background:0x33,0x55,0x33 --colors refine-removed:none:background:0x99,0x33,0x33:bold --colors removed:none:background:0x55,0x33,0x33
 ```
 
 #### Display line numbers
 
-The ` --line-numbers` displays the line numbers of the hunk.
+The ` --line-numbers` otion results in each line being prefixed with its line number.
 
 ### Related projects
 
-This is improvement on the
+This is an improvement on the
 [diff-highlight](https://github.com/git/git/tree/master/contrib/diff-highlight)
 script distributed with git.
 
